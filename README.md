@@ -6,21 +6,19 @@ Personal Claude Code configuration and utility scripts for enhanced development 
 
 - **CLAUDE.md** - Personal coding instructions and guidelines for Claude
 - **settings.example.json** - Example Claude Code settings configuration
-- **extract_usage.sh** - Script to extract and format token usage from conversation transcripts
-- **statusline-command.sh** - Custom status line command that displays model and token usage
+- **scripts/context_size.sh** - Script to extract and format token usage from conversation transcripts
+- **scripts/statusline.sh** - Custom status line command that displays model and token usage
+- **scripts/setup.sh** - Setup script to merge example settings with personal configuration
 - **.gitignore** - Git ignore configuration using selective include pattern
 
 ## Setup
 
-1. Copy the example settings to create your personal configuration:
+1. Run the setup script to configure your settings:
    ```bash
-   cp settings.example.json settings.json
+   ./scripts/setup.sh
    ```
-
-2. Make sure the utility scripts are executable:
-   ```bash
-   chmod +x extract_usage.sh statusline-command.sh
-   ```
+   
+   This will merge any new settings from `settings.example.json` into your `settings.json` while preserving existing customizations.
 
 3. The configuration will automatically be used by Claude Code when placed in `~/.claude/`
 

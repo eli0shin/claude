@@ -30,9 +30,9 @@ if ! jq empty "$SETTINGS_FILE" 2>/dev/null; then
     exit 1
 fi
 
-# Merge: example as base, existing settings override conflicts
+# Deep merge: existing as base, example overrides properties but preserves extras
 echo "Merging new properties from $EXAMPLE_FILE into $SETTINGS_FILE"
-if ! jq -s '.[0] * .[1]' "$EXAMPLE_FILE" "$SETTINGS_FILE" > "$TEMP_FILE"; then
+if ! jq -s '.[1] * .[0]' "$EXAMPLE_FILE" "$SETTINGS_FILE" > "$TEMP_FILE"; then
     echo "Error: Failed to merge JSON files"
     rm -f "$TEMP_FILE"
     exit 1

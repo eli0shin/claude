@@ -8,8 +8,8 @@ project_dir=$(echo "$input" | jq -r '.workspace.project_dir')
 model=$(echo "$input" | jq -r '.model.display_name')
 transcript_path=$(echo "$input" | jq -r '.transcript_path')
 
-# Get formatted context info from extract_usage.sh
-context_info=$(~/.claude/extract_usage.sh "$transcript_path" 2>/dev/null)
+# Get formatted context info from context_size.sh
+context_info=$(~/.claude/scripts/context_size.sh "$transcript_path" 2>/dev/null)
 
 # Build the status line with tokens and model
 status_text="$model - $context_info"

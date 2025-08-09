@@ -6,6 +6,5 @@
 !CLAUDE.md
 !README.md
 !settings.example.json
-!extract_usage.sh
-!statusline-command.sh
-!setup.sh
+!scripts/
+!scripts/*.sh

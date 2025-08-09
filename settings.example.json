@@ -6,7 +6,7 @@
   "model": "sonnet",
   "statusLine": {
     "type": "command",
-    "command": "bash ~/.claude/statusline-command.sh",
+    "command": "bash ~/.claude/scripts/statusline.sh",
     "padding": 0
   }
 }
