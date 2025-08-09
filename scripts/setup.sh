@@ -40,4 +40,9 @@ fi
 
 # Replace original with merged version
 mv "$TEMP_FILE" "$SETTINGS_FILE"
+
+# Make all scripts in the scripts directory executable
+echo "Making scripts executable..."
+chmod +x scripts/*.sh
+
 echo "Setup complete! Your existing settings have been preserved and new defaults have been added."
