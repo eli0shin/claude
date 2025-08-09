@@ -9,6 +9,7 @@ ALWAYS seek to identify whether a value is defined before first verifying whethe
 ALWAYS follow TDD when writing new features.
 ALWAYS seek to reproduce a bug before assuming what the fix is.
 ALWAYS save a plan requested by the user to a new file, update the plan proactively when assumptions change
+When refactoring functionality, REPLACE the existing behavior with the new behavior. DO NOT add feature flags, optional parameters, or conditionals to maintain old behavior unless explicitly requested.
 
 ## Information Gathering
 ALWAYS prioritize existing knowledge and codebase understanding first for local code.

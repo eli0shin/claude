@@ -10,7 +10,7 @@ CONV_FILE="$1"
 
 # Check if file exists
 if [ ! -f "$CONV_FILE" ]; then
-    echo "Error: File '$CONV_FILE' not found"
+    echo "(0%)"
     exit 1
 fi
 
@@ -18,7 +18,7 @@ fi
 USAGE_LINE=$(tail -n 10 "$CONV_FILE" | grep -E '"usage"' | tail -n 1)
 
 if [ -z "$USAGE_LINE" ]; then
-    echo "No usage information found in the last 10 lines"
+    echo "(0%)"
     exit 1
 fi
 
@@ -28,4 +28,17 @@ TOTAL=$(echo "$USAGE_LINE" | \
     grep -o '[0-9]\+' | \
     awk '{sum += $1} END {print sum}')
 
-echo "Total usage tokens: $TOTAL"
+if [ -n "$TOTAL" ] && [ "$TOTAL" -gt 0 ]; then
+    # Convert to human readable format with percentage of 200k context window
+    context_window_size=200000
+    usage_percentage=$(((TOTAL * 100) / context_window_size))
+    
+    if [ "$TOTAL" -gt 1000 ]; then
+        token_display=$((TOTAL / 1000))
+        echo "${token_display}k(${usage_percentage}%)"
+    else
+        echo "${TOTAL}(${usage_percentage}%)"
+    fi
+else
+    echo "(0%)"
+fi
