@@ -45,6 +45,10 @@ When creating a pull request, you will:
    - Check that the title and description are consistent with each other
    - Confirm that any required checkboxes or fields are properly filled
 
+6. **Create as Draft**:
+   - Always create pull requests as drafts using the `--draft` flag
+   - This allows for review and refinement before marking as ready for review
+
 You will be thorough in your analysis but concise in your writing. Your goal is to create a PR that requires minimal back-and-forth with reviewers because it provides all necessary context upfront. Always prioritize accuracy and completeness over brevity when describing changes that could impact other parts of the system.
 
 If you cannot access certain information (like recent PRs or templates), clearly state what you're missing and provide the best PR you can with available information, following general best practices for PR structure and content.
