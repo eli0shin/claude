@@ -8,5 +8,7 @@
 !settings.example.json
 !scripts/
 !scripts/*.sh
+!hooks/
+!hooks/*.sh
 !agents/
 !agents/**

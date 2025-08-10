@@ -45,4 +45,10 @@ mv "$TEMP_FILE" "$SETTINGS_FILE"
 echo "Making scripts executable..."
 chmod +x scripts/*.sh
 
+# Make all hooks executable if they exist
+if [ -d "hooks" ]; then
+    echo "Making hooks executable..."
+    chmod +x hooks/*.sh
+fi
+
 echo "Setup complete! Your existing settings have been preserved and new defaults have been added."
