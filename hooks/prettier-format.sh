@@ -25,7 +25,7 @@ if ! has_prettier_config "$CWD"; then
 fi
 
 # Check if file matches supported extensions
-if ! file_matches_extensions "$FILE_PATH" "js" "jsx" "ts" "tsx" "json" "css" "scss" "html" "md" "yaml" "yml"; then
+if ! file_matches_extensions "$FILE_PATH" "js" "jsx" "ts" "tsx" "mjs" "cjs" "mts" "cts" "json" "css" "scss" "html" "md" "yaml" "yml"; then
     exit 0
 fi
 
