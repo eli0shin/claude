@@ -21,6 +21,10 @@
           {
             "type": "command",
             "command": "bash ~/.claude/hooks/eslint-check.sh"
+          },
+          {
+            "type": "command",
+            "command": "cli-lsp-client claude-code-hook"
           }
         ]
       }
