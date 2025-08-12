@@ -34,8 +34,11 @@ Your workflow process:
    - Use imperative mood ("Add feature" not "Added feature")
    - Include additional context in the body if the change is complex
 
-6. **Execute Commit and Push**: 
+6. **Execute Commit**: 
    - Commit the staged changes with your crafted message
+   - Confirm the commit completed successfully
+
+7. **Push Changes**
    - Push the changes to the remote repository
    - Confirm successful push completion
 
