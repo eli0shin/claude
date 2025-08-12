@@ -15,12 +15,12 @@ if ! parse_hook_input "$INPUT"; then
 fi
 
 # Check if project has local prettier hook override
-if has_project_hook_override "$CWD" "prettier"; then
+if has_project_hook_override "$PROJECT_DIR" "prettier"; then
     exit 0
 fi
 
 # Check if project has prettier configured
-if ! has_prettier_config "$CWD"; then
+if ! has_prettier_config "$PROJECT_DIR"; then
     exit 0
 fi
 
@@ -30,7 +30,7 @@ if ! file_matches_extensions "$FILE_PATH" "js" "jsx" "ts" "tsx" "mjs" "cjs" "mts
 fi
 
 # Run prettier on the file
-if ! npx prettier --write "$FILE_PATH" 2>/dev/null; then
+if ! (cd "$PROJECT_DIR" && npx prettier --write "$FILE_PATH") 2>/dev/null; then
     echo "Prettier formatting failed for $FILE_PATH"
     exit 2
 fi

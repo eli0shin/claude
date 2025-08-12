@@ -6,12 +6,12 @@
 parse_hook_input() {
     local input="$1"
     
-    # Extract cwd and file_path
-    CWD=$(echo "$input" | jq -r ".cwd // empty" 2>/dev/null)
+    # Extract project_dir and file_path
+    PROJECT_DIR=$(echo "$input" | jq -r ".workspace.project_dir // empty" 2>/dev/null)
     FILE_PATH=$(echo "$input" | jq -r ".tool_input.file_path // empty" 2>/dev/null)
     
     # Validate we have required fields
-    if [[ -z "$CWD" || -z "$FILE_PATH" ]]; then
+    if [[ -z "$PROJECT_DIR" || -z "$FILE_PATH" ]]; then
         return 1
     fi
     
@@ -20,10 +20,10 @@ parse_hook_input() {
 
 # Check if project has local hook override for a tool
 has_project_hook_override() {
-    local cwd="$1"
+    local project_dir="$1"
     local tool="$2"
     
-    local project_settings="$cwd/.claude/settings.json"
+    local project_settings="$project_dir/.claude/settings.json"
     
     # Check if project has .claude/settings.json
     if [[ ! -f "$project_settings" ]]; then
@@ -40,16 +40,16 @@ has_project_hook_override() {
 
 # Check if prettier is configured in the project
 has_prettier_config() {
-    local cwd="$1"
+    local project_dir="$1"
     
     # Check for any file with "prettier" in the name
-    if ls "$cwd"/*prettier* >/dev/null 2>&1; then
+    if ls "$project_dir"/*prettier* >/dev/null 2>&1; then
         return 0
     fi
     
     # Check for prettier field in package.json
-    if [[ -f "$cwd/package.json" ]]; then
-        if jq -e ".prettier" "$cwd/package.json" >/dev/null 2>&1; then
+    if [[ -f "$project_dir/package.json" ]]; then
+        if jq -e ".prettier" "$project_dir/package.json" >/dev/null 2>&1; then
             return 0
         fi
     fi
@@ -59,16 +59,16 @@ has_prettier_config() {
 
 # Check if eslint is configured in the project
 has_eslint_config() {
-    local cwd="$1"
+    local project_dir="$1"
     
     # Check for any file with "eslint" in the name
-    if ls "$cwd"/*eslint* >/dev/null 2>&1; then
+    if ls "$project_dir"/*eslint* >/dev/null 2>&1; then
         return 0
     fi
     
     # Check for eslintConfig field in package.json
-    if [[ -f "$cwd/package.json" ]]; then
-        if jq -e ".eslintConfig" "$cwd/package.json" >/dev/null 2>&1; then
+    if [[ -f "$project_dir/package.json" ]]; then
+        if jq -e ".eslintConfig" "$project_dir/package.json" >/dev/null 2>&1; then
             return 0
         fi
     fi
