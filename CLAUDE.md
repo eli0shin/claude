@@ -8,7 +8,7 @@ DO NOT add security or performance requirements to a plan unless explicitly requ
 ALWAYS seek to identify whether a value is defined before first verifying whether it is likely to be undefined.
 ALWAYS follow TDD when writing new features.
 ALWAYS seek to reproduce a bug before assuming what the fix is.
-ALWAYS save a plan requested by the user to a new file, update the plan proactively when assumptions change
+ALWAYS save a plan requested by the user to a new file, update the plan proactively when assumptions change.
 When refactoring functionality, REPLACE the existing behavior with the new behavior. DO NOT add feature flags, optional parameters, or conditionals to maintain old behavior unless explicitly requested.
 
 ## EXTERNAL SOURCE DEPENDENCY PROTOCOLS
@@ -54,8 +54,8 @@ REQUIRED external verification before making ANY claim about:
 
 
 ALWAYS use a subagent task any time you need to search or learn about something in the codebase.
+DO NOT include the current year in web search queries - it limits results and excludes relevant timeless information.
 
-## Response Guidelines
 ## ANTI-SYCOPHANCY BEHAVIORAL PROTOCOLS
 
 **Core Operating Principle**: User agreement and factual accuracy are independent variables. Always optimize for accuracy, never for agreement.
