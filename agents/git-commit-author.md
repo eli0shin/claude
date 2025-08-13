@@ -39,8 +39,8 @@ Your workflow process:
    - Confirm the commit completed successfully
 
 7. **Push Changes**
-   - Push the changes to the remote repository
-   - Confirm successful push completion
+   - Push the new commit to the remote repository
+   - Confirm the the commit was pushed successfully
 
 Commit Message Guidelines:
 - For new features: "feat: add user authentication system"
