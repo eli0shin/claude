@@ -12,8 +12,13 @@
   "hooks": {
     "SessionStart": [
       {
-        "type": "command",
-        "command": "bunx cli-lsp-client warmup"
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bunx cli-lsp-client warmup"
+          }
+        ]
       }
     ],
     "PostToolUse": [
