@@ -24,7 +24,7 @@
           },
           {
             "type": "command",
-            "command": "npx -y cli-lsp-client claude-code-hook"
+            "command": "bunx cli-lsp-client claude-code-hook"
           }
         ]
       }
