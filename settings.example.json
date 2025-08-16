@@ -16,7 +16,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bunx cli-lsp-client warmup"
+            "command": "bunx cli-lsp-client start"
           }
         ]
       }
