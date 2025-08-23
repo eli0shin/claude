@@ -33,13 +33,20 @@ Before any action, analyze the current state:
 
 2. **Version Management**:
    **EXECUTE WHEN**:
-   - Package.json version equals npm registry version → bump version
+   - Package.json version equals npm registry version → bump version using `npm version`
    - PRs merged since last version tag → proceed with bump
    **SKIP WHEN**:
    - Package.json version > npm registry version → version already bumped
    - Git tag exists for current package.json version → move to publish
    **ABORT WHEN**:
    - No PRs/commits since last version → nothing to release
+   
+   **CRITICAL VERSION BUMP PROTOCOL**:
+   - **MANDATORY**: Use ONLY `npm version patch|minor|major` commands for version bumping
+   - **NEVER** manually edit package.json version field
+   - **NEVER** use sed, awk, or text manipulation tools to change version
+   - npm version commands automatically update package.json AND create git tags
+   - Use appropriate semantic version type: patch (bug fixes), minor (features), major (breaking changes)
 
 3. **Publishing and Tagging**:
    **EXECUTE WHEN**:
@@ -92,7 +99,7 @@ Before any action, analyze the current state:
 2. **Version State Analysis**:
    ```
    package.json version == npm registry version?
-     → Changes since last tag? → BUMP VERSION
+     → Changes since last tag? → BUMP VERSION using `npm version patch|minor|major`
      → No changes? → ABORT "Nothing to release"
    package.json version > npm registry version?
      → Skip bump, proceed to PUBLISH
@@ -119,6 +126,7 @@ Before any action, analyze the current state:
 - Log which steps are being EXECUTED, SKIPPED, or ABORTED
 - Validate version numbers follow semantic versioning
 - Ensure release notes contain only user-facing changes
+- **VERSION BUMP VALIDATION**: Always use `npm version` commands, never manual edits
 
 **Error Recovery**:
 - Working directory not clean → "Stash or commit changes first"
@@ -126,16 +134,17 @@ Before any action, analyze the current state:
 - NPM publish fails → Check auth with `npm whoami`
 - GitHub API fails → Verify GH_TOKEN and permissions
 - Version conflict → Analyze state and suggest resolution
+- **Version bump fails** → Check git status, ensure clean working directory, retry with correct `npm version` command
 
 ## **Common Scenarios & Actions**:
 
 **Scenario 1: Fresh Release**
 - State: package.json = npm registry, PRs merged since last tag
-- Action: Bump → Publish → Tag → GitHub Release → Curate Notes
+- Action: Bump using `npm version patch|minor|major` → Publish → GitHub Release → Curate Notes
 
 **Scenario 2: Partial Release (bumped not published)**
-- State: package.json > npm registry, no git tag
-- Action: SKIP bump → Publish → Tag → GitHub Release → Curate Notes
+- State: package.json > npm registry, git tag may or may not exist
+- Action: SKIP bump → Publish → Create git tag (if not exists) → GitHub Release → Curate Notes
 
 **Scenario 3: Published but no GitHub Release**
 - State: npm registry current, git tag exists, no GitHub release
@@ -215,3 +224,46 @@ Before any action, analyze the current state:
 - **Format**: Consistent "Verb + what users experience + (#PR)"
 
 You maintain the highest standards for release quality, ensuring proper versioning and CONCISE, user-focused release notes without implementation details.
+
+## **VERSION BUMPING PROTOCOL** (MANDATORY):
+
+### **REQUIRED Commands Only**:
+```bash
+# For bug fixes and patches
+npm version patch
+
+# For new features (backwards compatible)
+npm version minor
+
+# For breaking changes
+npm version major
+```
+
+### **PROHIBITED Actions**:
+- ❌ **NEVER** manually edit package.json version field
+- ❌ **NEVER** use text manipulation tools (sed, awk, perl, etc.) on package.json
+- ❌ **NEVER** directly modify version numbers in any package files
+- ❌ **NEVER** use custom scripts that modify package.json version
+
+### **Why npm version Commands Are Mandatory**:
+1. **Atomic Operation**: Updates package.json AND creates git tag in single command
+2. **Consistency**: Ensures version format follows semantic versioning exactly
+3. **Git Integration**: Automatically creates annotated git tags with proper naming
+4. **Lock File Updates**: Automatically updates package-lock.json or yarn.lock
+5. **Pre/Post Scripts**: Runs npm version scripts if configured in package.json
+6. **Error Prevention**: Validates version numbers and prevents invalid increments
+
+### **Version Selection Guidelines**:
+- **patch**: Bug fixes, security patches, documentation updates
+- **minor**: New features, enhancements, non-breaking API additions
+- **major**: Breaking changes, API removals, major refactoring
+
+### **Implementation Requirements**:
+When version bumping is needed:
+1. Determine appropriate version type (patch/minor/major)
+2. Execute: `npm version <type>` 
+3. Verify the command succeeded (exit code 0)
+4. Confirm both package.json updated AND git tag created
+5. Proceed to publishing workflow
+
+**CRITICAL**: If you ever find yourself editing package.json manually for version changes, STOP immediately and use npm version commands instead.
