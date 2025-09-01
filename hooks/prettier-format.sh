@@ -30,10 +30,12 @@ if ! file_matches_extensions "$FILE_PATH" "js" "jsx" "ts" "tsx" "mjs" "cjs" "mts
 fi
 
 # Run prettier on the file
-if ! (cd "$PROJECT_DIR" && npx prettier --write "$FILE_PATH") 2>/dev/null; then
-    echo "Prettier formatting failed for $FILE_PATH"
+PRETTIER_OUTPUT=$(cd "$PROJECT_DIR" && bunx prettier --write "$FILE_PATH" 2>&1)
+PRETTIER_EXIT_CODE=$?
+
+if [[ $PRETTIER_EXIT_CODE -eq 0 ]]; then
+    exit 0
+else
+    echo "Prettier formatting failed for $FILE_PATH: $PRETTIER_OUTPUT" >&2
     exit 2
 fi
-
-# Silent success
-exit 0

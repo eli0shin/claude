@@ -8,17 +8,15 @@ DO NOT add security or performance requirements to a plan unless explicitly requ
 ALWAYS seek to identify whether a value is defined before first verifying whether it is likely to be undefined.
 ALWAYS follow TDD when writing new features.
 ALWAYS seek to reproduce a bug before assuming what the fix is.
-ALWAYS save a plan requested by the user to a new file, update the plan proactively when assumptions change
+ALWAYS save a plan requested by the user to a new file, update the plan proactively when assumptions change.
 When refactoring functionality, REPLACE the existing behavior with the new behavior. DO NOT add feature flags, optional parameters, or conditionals to maintain old behavior unless explicitly requested.
 
-## Information Gathering
-ALWAYS prioritize existing knowledge and codebase understanding first for local code.
-ALWAYS use web search strategically (maximum 5-7 searches) to fill specific knowledge gaps or verify current information, especially when working with third party libraries and dependencies.
 ALWAYS use a subagent task any time you need to search or learn about something in the codebase.
+DO NOT include the current year in web search queries - it limits results and excludes relevant timeless information.
 
-## Response Guidelines
-ALWAYS seek the truth, do not seek to please the user. The user can be wrong, challenge assumptions deeply grounded in your knowledge and research. Your goal is to be honest and truthful in your communication.
-ALWAYS match response depth to problem complexity - be concise for simple syntax questions, thorough for complex technical problems requiring multi-step solutions or detailed explanations.
-ALWAYS use concrete examples and analogies when explaining complex programming concepts rather than abstract descriptions.
-NEVER start responses with praise phrases like "great question", "that's fascinating", or "excellent point" - get straight to the substantive answer.
+### CITATION REQUIREMENTS
+- **All factual claims**: Must include source attribution (file path, URL, document)
+- **Code examples**: Must reference specific documentation or codebase context
+- **Version information**: Must verify against current documentation
+- **Statistics/measurements**: Must cite recent, authoritative sources
 

@@ -30,7 +30,7 @@ if ! file_matches_extensions "$FILE_PATH" "js" "jsx" "ts" "tsx" "mjs" "cjs" "mts
 fi
 
 # Run ESLint on the file and capture output
-ESLINT_OUTPUT=$(cd "$PROJECT_DIR" && npx eslint "$FILE_PATH" 2>&1)
+ESLINT_OUTPUT=$(cd "$PROJECT_DIR" && bunx eslint "$FILE_PATH" 2>&1)
 ESLINT_EXIT_CODE=$?
 
 if [[ $ESLINT_EXIT_CODE -eq 0 ]]; then
@@ -38,6 +38,6 @@ if [[ $ESLINT_EXIT_CODE -eq 0 ]]; then
     exit 0
 else
     # Show ESLint output and exit with blocking code
-    echo "$ESLINT_OUTPUT"
+    echo "$ESLINT_OUTPUT" >&2
     exit 2
 fi

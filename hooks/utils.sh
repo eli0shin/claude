@@ -7,7 +7,7 @@ parse_hook_input() {
     local input="$1"
     
     # Extract project_dir and file_path
-    PROJECT_DIR=$(echo "$input" | jq -r ".workspace.project_dir // empty" 2>/dev/null)
+    PROJECT_DIR=$(echo "$input" | jq -r ".cwd // empty" 2>/dev/null)
     FILE_PATH=$(echo "$input" | jq -r ".tool_input.file_path // empty" 2>/dev/null)
     
     # Validate we have required fields

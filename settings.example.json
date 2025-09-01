@@ -10,6 +10,17 @@
     "padding": 0
   },
   "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bunx cli-lsp-client start"
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "matcher": "Edit|MultiEdit|Write",
@@ -24,7 +35,7 @@
           },
           {
             "type": "command",
-            "command": "npx -y cli-lsp-client claude-code-hook"
+            "command": "bunx cli-lsp-client claude-code-hook"
           }
         ]
       }
