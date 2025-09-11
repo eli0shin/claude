@@ -33,9 +33,12 @@ fi
 PRETTIER_OUTPUT=$(cd "$PROJECT_DIR" && bunx prettier --write "$FILE_PATH" 2>&1)
 PRETTIER_EXIT_CODE=$?
 
-if [[ $PRETTIER_EXIT_CODE -eq 0 ]]; then
-    exit 0
-else
-    echo "Prettier formatting failed for $FILE_PATH: $PRETTIER_OUTPUT" >&2
-    exit 2
+# Always exit 0 - prettier should never block operations
+# Syntax errors will be caught by eslint/LSP
+# Technical issues (missing deps, config problems) should fail silently
+if [[ $PRETTIER_EXIT_CODE -ne 0 ]]; then
+    # Log the error for debugging but don't block
+    echo "Prettier encountered an issue with $FILE_PATH (exit code: $PRETTIER_EXIT_CODE): $PRETTIER_OUTPUT" >&2
 fi
+
+exit 0
