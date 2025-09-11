@@ -1,6 +1,6 @@
 ---
 name: git-commit-author
-description: Use this agent when you need to commit and push git changes with intelligent commit messages. Do not provide this agent with a prompt. Examples: <example>Context: User has made changes to multiple files and wants to commit them all with a meaningful message. user: 'Commit my changes' assistant: 'I'll use the git-commit-author agent to analyze your changes and create an appropriate commit message' <commentary>Since the user wants to commit changes, use the git-commit-author agent to handle the full git workflow including analyzing changes, creating commit messages, and pushing.</commentary></example>
+description: Use this agent when you need to commit and push git changes with intelligent commit messages. Do not describe the changes to the agent, it is the agent's responsibility to investigate the scope of the changes. Examples: <example>Context: User has made changes to multiple files and wants to commit them all with a meaningful message. user: 'Commit my changes' assistant: 'I'll use the git-commit-author agent to analyze your changes and create an appropriate commit message' <commentary>Since the user wants to commit changes, use the git-commit-author agent to handle the full git workflow including analyzing changes, creating commit messages, and pushing.</commentary></example>
 tools: Bash, Read, BashOutput, KillBash, TodoWrite
 model: sonnet
 color: yellow
