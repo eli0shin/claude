@@ -22,9 +22,10 @@ if [ -z "$USAGE_LINE" ]; then
     exit 1
 fi
 
-# Extract all numeric values from the usage object and add them together
+# Extract all numeric values from the usage object (excluding nested cache_creation) and add them together
 TOTAL=$(echo "$USAGE_LINE" | \
     grep -o '"usage":{[^}]*}' | \
+    sed 's/"cache_creation":{[^}]*}//g' | \
     grep -o '[0-9]\+' | \
     awk '{sum += $1} END {print sum}')
 
