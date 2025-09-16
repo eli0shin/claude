@@ -24,11 +24,6 @@ if ! has_prettier_config "$PROJECT_DIR"; then
     exit 0
 fi
 
-# Check if file matches supported extensions
-if ! file_matches_extensions "$FILE_PATH" "js" "jsx" "ts" "tsx" "mjs" "cjs" "mts" "cts" "json" "css" "scss" "html" "md" "yaml" "yml"; then
-    exit 0
-fi
-
 # Run prettier on the file
 PRETTIER_OUTPUT=$(cd "$PROJECT_DIR" && bunx prettier --write "$FILE_PATH" 2>&1)
 PRETTIER_EXIT_CODE=$?

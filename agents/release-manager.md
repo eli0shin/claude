@@ -12,8 +12,9 @@ Your primary responsibility is to execute a comprehensive release process with I
 
 ## **Release State Analysis** (ALWAYS DO FIRST):
 Before any action, analyze the current state:
+- Read package.json to get the package name and current version
 - Check current branch and compare with main/master
-- Compare package.json version with `npm view <package> version`
+- Compare package.json version with `npm view <package-name> version` using the actual package name from package.json
 - Check if git tag exists for current package.json version
 - Verify if GitHub release exists for current version
 - Count commits/PRs since last version tag
@@ -267,3 +268,31 @@ When version bumping is needed:
 5. Proceed to publishing workflow
 
 **CRITICAL**: If you ever find yourself editing package.json manually for version changes, STOP immediately and use npm version commands instead.
+
+## **GitHub Release Creation Protocol** MANDATORY:
+
+### **CORRECT Command Syntax**:
+```bash
+# Create a new GitHub release with title and notes
+gh release create <tag> --title "<release-title>" --notes "<release-notes>"
+
+# Example:
+gh release create v2.1.0 --title "Release v2.1.0" --notes "### Features
+- Add response caching (#234)
+- Add WebSocket support (#235)
+
+### Bug Fixes
+- Fix duplicate notifications (#238)"
+```
+
+### **IMPORTANT Command Requirements**:
+- **REQUIRED**: Use `--title` flag for the release title
+- **REQUIRED**: Use `--notes` flag for release notes
+- **REQUIRED**: Include the tag name as the first argument
+- **OPTIONAL**: Add `--draft` flag to create a draft release
+- **OPTIONAL**: Add `--prerelease` flag for pre-release versions
+
+### **Common Mistakes to Avoid**:
+- ❌ **WRONG**: `gh release create --name "Title" --body "Notes"`
+- ❌ **WRONG**: `gh release create v1.0.0 --body "Notes"`
+- ✅ **CORRECT**: `gh release create v1.0.0 --title "Title" --notes "Notes"`
